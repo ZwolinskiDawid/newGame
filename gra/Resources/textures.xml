@@ -1,0 +1,11 @@
+<textures textureSize="50">
+	<texture type="grass" walkable="True">..\..\Resources\grass.jpg</texture>
+	<texture type="obstacle" walkable="False">..\..\Resources\tree.gif</texture>
+	<texture type="sand" walkable="True">..\..\Resources\sand.jpg</texture>
+	<texture type="grass" walkable="True">..\..\Resources\grass.png</texture>
+  <texture type="stone" walkable="True">..\..\Resources\stone.jpg</texture>
+  <texture type="stone" walkable="True">..\..\Resources\stone2.jpg</texture>
+  <texture type="obstacle" walkable="False">..\..\Resources\rock.gif</texture>
+  <human>..\..\Resources\homer.gif</human>
+	<bullet>..\..\Resources\bullet.gif</bullet>
+</textures>

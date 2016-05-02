@@ -1,0 +1,45 @@
+F:\zaki\My files\My files\gra\gra\gra\bin\Debug\gra.exe.config
+F:\zaki\My files\My files\gra\gra\gra\bin\Debug\gra.exe
+F:\zaki\My files\My files\gra\gra\gra\bin\Debug\gra.pdb
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\gra.csprojResolveAssemblyReference.cache
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\MainWindow.g.cs
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\App.g.cs
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\gra_MarkupCompile.cache
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\gra_MarkupCompile.lref
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\MainWindow.baml
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\gra.g.resources
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\gra.Properties.Resources.resources
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\gra.csproj.GenerateResource.Cache
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\gra.exe
+F:\zaki\My files\My files\gra\gra\gra\obj\Debug\gra.pdb
+F:\zaki\My files\My files\gra\gra\newGame\gra\bin\Debug\gra.exe.config
+F:\zaki\My files\My files\gra\gra\newGame\gra\obj\Debug\gra.exe
+F:\zaki\My files\My files\gra\gra\newGame\gra\obj\Debug\gra.pdb
+C:\Users\Dawid\Desktop\newGame-master\gra\bin\Debug\gra.exe.config
+C:\Users\Dawid\Desktop\newGame-master\gra\bin\Debug\gra.exe
+C:\Users\Dawid\Desktop\newGame-master\gra\bin\Debug\gra.pdb
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\gra.csprojResolveAssemblyReference.cache
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\MainWindow.g.cs
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\App.g.cs
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\gra_MarkupCompile.cache
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\gra_MarkupCompile.lref
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\MainWindow.baml
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\gra.g.resources
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\gra.Properties.Resources.resources
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\gra.csproj.GenerateResource.Cache
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\gra.exe
+C:\Users\Dawid\Desktop\newGame-master\gra\obj\Debug\gra.pdb
+C:\Users\Dawid\Desktop\newGame\gra\bin\Debug\gra.exe.config
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.exe
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.pdb
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.csprojResolveAssemblyReference.cache
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\MainWindow.g.cs
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\App.g.cs
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra_MarkupCompile.cache
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra_MarkupCompile.lref
+C:\Users\Dawid\Desktop\newGame\gra\bin\Debug\gra.exe
+C:\Users\Dawid\Desktop\newGame\gra\bin\Debug\gra.pdb
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\MainWindow.baml
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.g.resources
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.Properties.Resources.resources
+C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.csproj.GenerateResource.Cache
