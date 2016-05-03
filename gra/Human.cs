@@ -9,12 +9,12 @@ namespace gra
 {
     public class Human : Movable
     {
-        public Human(Point p)
+        public Human(Point p, Container c)
         {
             Position = p;
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
             Direction = new Vector();
-            speed = 3;
+            World = c;
         }
 
         private BitmapImage LoadTexture(string texturesXmlDir)
