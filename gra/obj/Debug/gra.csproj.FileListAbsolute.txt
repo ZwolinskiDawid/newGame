@@ -57,3 +57,17 @@ F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\MainWindow.baml
 F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.g.resources
 F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.Properties.Resources.resources
 F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.csproj.GenerateResource.Cache
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\bin\Debug\gra.exe.config
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\bin\Debug\gra.exe
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\bin\Debug\gra.pdb
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\gra.csprojResolveAssemblyReference.cache
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\MainWindow.g.cs
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\App.g.cs
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\gra_MarkupCompile.cache
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\gra_MarkupCompile.lref
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\MainWindow.baml
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\gra.g.resources
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\gra.Properties.Resources.resources
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\gra.csproj.GenerateResource.Cache
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\gra.exe
+C:\Users\Dawid\Desktop\Projects\Rozprochy\Game\C#\newGame\gra\obj\Debug\gra.pdb

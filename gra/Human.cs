@@ -14,6 +14,7 @@ namespace gra
             Position = p;
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
             Direction = new Vector();
+            speed = 3;
         }
 
         private BitmapImage LoadTexture(string texturesXmlDir)

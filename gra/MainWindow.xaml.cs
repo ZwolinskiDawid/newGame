@@ -29,6 +29,8 @@ namespace gra
 
         private void MoveMap()
         {
+            World.MoveMovables();
+
             Point position = CenterOfGameScreen;
             position.X -= getPlayerPosition(World.index).X;
             position.Y -= getPlayerPosition(World.index).Y;
@@ -65,23 +67,42 @@ namespace gra
             {
                 if (e.Key == Key.Up)
                 {
-                    
-                    //this.sender.send((int)playerPosition.X, (int)playerPosition.Y - 50, (int)e.Key);
+                    World.players[World.index].Direction = new Vector(0, -3);
                 }
                 else if (e.Key == Key.Down)
                 {
-                    
-                    //this.sender.send((int)playerPosition.X, (int)playerPosition.Y + 50, (int)e.Key);
+                    World.players[World.index].Direction = new Vector(0, 3);
                 }
                 else if (e.Key == Key.Right)
                 {
-                    
-                    //this.sender.send((int)playerPosition.X + 50, (int)playerPosition.Y, (int)e.Key);
+                    World.players[World.index].Direction = new Vector(3, 0);
                 }
                 else if (e.Key == Key.Left)
                 {
-                                        
-                    //this.sender.send((int)playerPosition.X - 50, (int)playerPosition.Y, (int)e.Key);
+                    World.players[World.index].Direction = new Vector(-3, 0);
+                }
+            }
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!e.IsRepeat)
+            {
+                if (e.Key == Key.Up && World.players[World.index].Direction.Y == -3)
+                {
+                    World.players[World.index].Direction = new Vector(0, 0);
+                }
+                else if (e.Key == Key.Down && World.players[World.index].Direction.Y == 3)
+                {
+                    World.players[World.index].Direction = new Vector(0, 0);
+                }
+                else if (e.Key == Key.Right && World.players[World.index].Direction.X == 3)
+                {
+                    World.players[World.index].Direction = new Vector(0, 0);
+                }
+                else if (e.Key == Key.Left && World.players[World.index].Direction.X == -3)
+                {
+                    World.players[World.index].Direction = new Vector(0, 0);
                 }
             }
         }
@@ -128,13 +149,16 @@ namespace gra
 
             //========NEW THREAD = LISTENER===============
 
-            Thread worker2 = new Thread(new ThreadStart(this.listener.listen));
-            worker2.Start();
+            //Thread worker2 = new Thread(new ThreadStart(this.listener.listen));
+            //worker2.Start();
         }
 
         private Point getPlayerPosition(int index)
         {
-            return World.players[index].Position;
+            lock(World.players[index])
+            {
+                return World.players[index].Position;
+            }
         }
 
         private Image getPlayerImage(int index)

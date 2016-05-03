@@ -5,6 +5,7 @@ namespace gra
 {
     public class Movable
     {
+        public double speed { get; set; }
         public Point Position { get; set; }
 
         public BitmapImage Appearance { get; set; }
@@ -14,7 +15,7 @@ namespace gra
         {
             set
             {
-                if((direction.X == 0 && value.X == 0) || (direction.Y == 0 && value.Y == 0))
+                if(true)
                 {
                     direction = value;
                 }

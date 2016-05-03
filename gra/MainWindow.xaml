@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gra"
         mc:Ignorable="d"
-        Title="MainWindow" Height="657" Width="700" Keyboard.PreviewKeyDown="Window_KeyDown">
+        Title="MainWindow" Height="657" Width="700" Keyboard.PreviewKeyDown="Window_KeyDown" Keyboard.PreviewKeyUp="Window_KeyUp">
     <Grid Margin="0,0,2,0">
         <Canvas x:Name="gameBorder" Margin="10,10,649,286" Background="#FFBDBDBD" ClipToBounds="True" Width="500" Height="500"/>
         <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="515,10,0,0" VerticalAlignment="Top" Width="75" Click="Connect_Click"/>
