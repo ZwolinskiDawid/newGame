@@ -36,7 +36,27 @@ namespace gra
             Canvas.SetLeft(mapImage, position.X);
             Canvas.SetTop(mapImage, position.Y);
 
-            World.MoveMovables();
+            //=============MOVE PLAYERS===============
+            for (int i = 0; i < World.numberOfPlayers; i++)
+            {
+                if(i != World.index)
+                {
+                    Canvas.SetLeft(getPlayerImage(i), position.X + getPlayerPosition(i).X);
+                    Canvas.SetTop(getPlayerImage(i), position.Y + getPlayerPosition(i).Y);
+                }
+            }
+
+            /*
+            //=============MOVE BULLETS===============
+            for (int i = 0; i < World.numberOfPlayers; i++)
+            {
+                if(i != World.index)
+                {
+                    Canvas.SetLeft(getPlayerImage(i), position.X + getPlayerPosition(i).X);
+                    Canvas.SetTop(getPlayerImage(i), position.Y + getPlayerPosition(i).Y);
+                }
+            }
+            */
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

@@ -106,7 +106,7 @@ namespace gra
         {
             for (int i = 0; i < numberOfPlayers; i++)
             {
-                players[i].Move()
+                players[i].Move();
             }
         }
     }
