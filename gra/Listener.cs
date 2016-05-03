@@ -41,35 +41,38 @@ namespace gra
 
                 if(key == 0)
                 {
-                    players[index].Direction = new Vector(0, -3);
+                    lock(players[index])
+                    {
+                        players[index].Direction = new Vector(0, -3);
+                    }
                 }
                 else if (key == 1)
                 {
-                    players[index].Direction = new Vector(0, 3);
+                    lock (players[index])
+                    {
+                        players[index].Direction = new Vector(0, 3);
+                    }
                 }
                 else if (key == 2)
                 {
-                    players[index].Direction = new Vector(3, 0);
+                    lock (players[index])
+                    {
+                        players[index].Direction = new Vector(3, 0);
+                    }
                 }
                 else if (key == 3)
                 {
-                    players[index].Direction = new Vector(-3, 0);
+                    lock (players[index])
+                    {
+                        players[index].Direction = new Vector(-3, 0);
+                    }
                 }
-                else if (key == 4)
+                else if (key == 4 || key == 5 || key == 6 || key == 7)
                 {
-                    players[index].Direction = new Vector(0, 0);
-                }
-                else if (key == 5)
-                {
-                    players[index].Direction = new Vector(0, 0);
-                }
-                else if (key == 6)
-                {
-                    players[index].Direction = new Vector(0, 0);
-                }
-                else if (key == 7)
-                {
-                    players[index].Direction = new Vector(0, 0);
+                    lock (players[index])
+                    {
+                        players[index].Direction = new Vector(0, 0);
+                    }
                 }
 
             }
