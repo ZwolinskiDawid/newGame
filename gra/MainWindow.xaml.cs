@@ -31,6 +31,9 @@ namespace gra
         {
             World.MoveMovables();
 
+            sender.send((int)getPlayerPosition(World.index).X,
+                        (int)getPlayerPosition(World.index).Y, 0);
+
             Point position = CenterOfGameScreen;
             position.X -= getPlayerPosition(World.index).X;
             position.Y -= getPlayerPosition(World.index).Y;
@@ -149,8 +152,8 @@ namespace gra
 
             //========NEW THREAD = LISTENER===============
 
-            //Thread worker2 = new Thread(new ThreadStart(this.listener.listen));
-            //worker2.Start();
+            Thread worker2 = new Thread(new ThreadStart(this.listener.listen));
+            worker2.Start();
         }
 
         private Point getPlayerPosition(int index)
