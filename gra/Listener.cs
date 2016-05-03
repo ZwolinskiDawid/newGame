@@ -38,6 +38,40 @@ namespace gra
                 index = (int)buffor[5];
 
                 players[index].Position = new Point((double)x, (double)y);
+
+                if(key == 0)
+                {
+                    players[index].Direction = new Vector(0, -3);
+                }
+                else if (key == 1)
+                {
+                    players[index].Direction = new Vector(0, 3);
+                }
+                else if (key == 2)
+                {
+                    players[index].Direction = new Vector(3, 0);
+                }
+                else if (key == 3)
+                {
+                    players[index].Direction = new Vector(-3, 0);
+                }
+                else if (key == 4)
+                {
+                    players[index].Direction = new Vector(0, 0);
+                }
+                else if (key == 5)
+                {
+                    players[index].Direction = new Vector(0, 0);
+                }
+                else if (key == 6)
+                {
+                    players[index].Direction = new Vector(0, 0);
+                }
+                else if (key == 7)
+                {
+                    players[index].Direction = new Vector(0, 0);
+                }
+
             }
         }
 
