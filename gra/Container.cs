@@ -43,7 +43,7 @@ namespace gra
                 if (i == 3) { players.Add(new Human(new Point(950, 950))); }
             }
         }
-
+        
         public void CreateMap(Point position)
         {
             LoadMap(@"..\..\Resources\container.xml", @"..\..\Resources\textures.xml");
@@ -100,6 +100,14 @@ namespace gra
 
             XmlNode textures = xml.SelectSingleNode("/textures");
             FieldSize = Convert.ToInt32(textures.Attributes["textureSize"].Value);
+        }
+
+        public void MoveMovables()
+        {
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                players[i].Move()
+            }
         }
     }
 }

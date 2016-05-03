@@ -30,44 +30,38 @@ namespace gra
         private void MoveMap()
         {
             Point position = CenterOfGameScreen;
-            position.X -= playerPosition.X;
-            position.Y -= playerPosition.Y;
+            position.X -= getPlayerPosition(World.index).X;
+            position.Y -= getPlayerPosition(World.index).Y;
 
             Canvas.SetLeft(mapImage, position.X);
             Canvas.SetTop(mapImage, position.Y);
 
-            for (int i = 0; i < World.numberOfPlayers; i++)
-            {
-                if(i != World.index)
-                {
-                    position.X += World.players[i].Position.X;
-                    position.Y += World.players[i].Position.Y;
-
-                    Canvas.SetLeft(World.mapContainer.players[i], position.X);
-                    Canvas.SetTop(World.mapContainer.players[i], position.Y);
-                }
-            }
-        }        
+            World.MoveMovables();
+        }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if(!e.IsRepeat)
+            if (!e.IsRepeat)
             {
                 if (e.Key == Key.Up)
                 {
-                    this.sender.send((int)playerPosition.X, (int)playerPosition.Y - 50, (int)e.Key);
+                    
+                    //this.sender.send((int)playerPosition.X, (int)playerPosition.Y - 50, (int)e.Key);
                 }
                 else if (e.Key == Key.Down)
                 {
-                    this.sender.send((int)playerPosition.X, (int)playerPosition.Y + 50, (int)e.Key);
+                    
+                    //this.sender.send((int)playerPosition.X, (int)playerPosition.Y + 50, (int)e.Key);
                 }
                 else if (e.Key == Key.Right)
                 {
-                    this.sender.send((int)playerPosition.X + 50, (int)playerPosition.Y, (int)e.Key);
+                    
+                    //this.sender.send((int)playerPosition.X + 50, (int)playerPosition.Y, (int)e.Key);
                 }
                 else if (e.Key == Key.Left)
                 {
-                    this.sender.send((int)playerPosition.X - 50, (int)playerPosition.Y, (int)e.Key);
+                                        
+                    //this.sender.send((int)playerPosition.X - 50, (int)playerPosition.Y, (int)e.Key);
                 }
             }
         }
@@ -118,21 +112,16 @@ namespace gra
             worker2.Start();
         }
 
-        private Point playerPosition
+        private Point getPlayerPosition(int index)
         {
-            get
+            return World.players[index].Position;
+        }
+
+        private Image getPlayerImage(int index)
+        {
+            lock(World.mapContainer.players[index])
             {
-                lock(World.players)
-                {
-                    return World.players[World.index].Position;
-                }
-            }
-            set
-            {
-                lock (World.players)
-                {
-                    World.players[World.index].Position = value;
-                }
+                return World.mapContainer.players[index];
             }
         }
 
