@@ -29,7 +29,10 @@ namespace gra
 
         private void MoveMap()
         {
-            World.MoveMovables();            
+            World.MoveMovables();
+
+            this.sender.send((int)getPlayerPosition(World.index).X,
+                        (int)getPlayerPosition(World.index).Y, 8);
 
             Point position = CenterOfGameScreen;
             position.X -= getPlayerPosition(World.index).X;

@@ -37,9 +37,17 @@ namespace gra
                 key = (int)buffor[4];
                 index = (int)buffor[5];
 
+                if(key == 8 && (players[index].Position.X != x || players[index].Position.Y != y))
+                {
+                    lock (players[index])
+                    {
+                        players[index].Direction = new Vector(0, 0);
+                    }
+                }
+
                 players[index].Position = new Point((double)x, (double)y);
 
-                if(key == 0)
+                if (key == 0)
                 {
                     lock(players[index])
                     {
@@ -74,7 +82,6 @@ namespace gra
                         players[index].Direction = new Vector(0, 0);
                     }
                 }
-
             }
         }
 
