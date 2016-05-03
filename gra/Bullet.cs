@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Text;
 using System.Windows.Media.Imaging;
 using System.Xml;
+using System.IO;
 
 namespace gra
 {
-    public class Human : Movable
+    class Bullet : Movable
     {
-        public Human(Point p)
+        public Bullet(Point p, Vector d)
         {
             Position = p;
+            Direction = d;
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
-            Direction = new Vector();
         }
 
         private BitmapImage LoadTexture(string texturesXmlDir)
@@ -25,7 +22,7 @@ namespace gra
             string xmlString = (new StreamReader(texturesXmlDir, Encoding.UTF8)).ReadToEnd();
             xml.LoadXml(xmlString);
 
-            XmlNode texture = xml.SelectSingleNode("/textures/human");
+            XmlNode texture = xml.SelectSingleNode("/textures/bullet");
 
             BitmapImage logo = new BitmapImage();
             logo.BeginInit();

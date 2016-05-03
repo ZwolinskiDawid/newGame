@@ -43,3 +43,17 @@ C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\MainWindow.baml
 C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.g.resources
 C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.Properties.Resources.resources
 C:\Users\Dawid\Desktop\newGame\gra\obj\Debug\gra.csproj.GenerateResource.Cache
+F:\zaki\My files\My files\gra\newGame\gra\bin\Debug\gra.exe.config
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.exe
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.pdb
+F:\zaki\My files\My files\gra\newGame\gra\bin\Debug\gra.exe
+F:\zaki\My files\My files\gra\newGame\gra\bin\Debug\gra.pdb
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.csprojResolveAssemblyReference.cache
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\MainWindow.g.cs
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\App.g.cs
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra_MarkupCompile.cache
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra_MarkupCompile.lref
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\MainWindow.baml
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.g.resources
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.Properties.Resources.resources
+F:\zaki\My files\My files\gra\newGame\gra\obj\Debug\gra.csproj.GenerateResource.Cache

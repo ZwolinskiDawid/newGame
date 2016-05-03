@@ -13,12 +13,19 @@ namespace gra
     public class Container
     {
         public MapContainer mapContainer { get; set; }
+
         public int[,] Map { get; set; }
+
         public int?[,] MapOfObstacles { get; set; }
+
         public int MapSize { get; set; }
+
         public int FieldSize { get; set; }
+
         public List<Human> players { get; set; }
+
         public int index { get; set; }
+
         public int numberOfPlayers { get; set; }
 
         public Container()
