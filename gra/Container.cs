@@ -38,6 +38,7 @@ namespace gra
         {
             for(int i = 1; i < numberOfPlayers; i++)
             {
+                if (i == 0) { players.Add(new Human(new Point(0, 0))); }
                 if (i == 1) { players.Add(new Human(new Point(950, 0))); }
                 if (i == 2) { players.Add(new Human(new Point(0, 950))); }
                 if (i == 3) { players.Add(new Human(new Point(950, 950))); }

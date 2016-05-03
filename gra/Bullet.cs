@@ -9,11 +9,12 @@ namespace gra
 {
     class Bullet : Movable
     {
-        public Bullet(Point p, Vector d)
+        public Bullet(Point p, Vector d, Container c)
         {
             Position = p;
             Direction = d;
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
+            World = c;
         }
 
         private BitmapImage LoadTexture(string texturesXmlDir)
