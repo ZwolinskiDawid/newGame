@@ -21,18 +21,16 @@ namespace gra
             }
             else
             {
-                World.sender.send((int)RealPosition.X, (int)RealPosition.Y, 5);
+                if(this == World.players[World.index])
+                    World.sender.send((int)RealPosition.X, (int)RealPosition.Y, 5);
+
                 RealDirection = new Vector(0, 0);
             }
         }
         
         public bool CanMove()
         {
-            if (IsOutOfMap())
-            {
-                return false;
-            }
-            else if (this == World.players[World.index] && CollisionWithObstacles())
+            if (IsOutOfMap() || CollisionWithObstacles())
             {
                 return false;
             }

@@ -17,7 +17,7 @@ namespace gra
         public Listener(Container World)
         {
             this.listener = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            this.listener.Connect("localhost", 9999);
+            this.listener.Connect("25.88.205.228", 9999);
             this.World = World;
         }
 
