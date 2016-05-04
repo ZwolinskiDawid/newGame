@@ -72,8 +72,8 @@ namespace gra
 
                 if(i != World.index)
                 {
-                    Canvas.SetLeft(players[i], position.X + World.players[i].Position.X);
-                    Canvas.SetTop(players[i], position.Y + World.players[i].Position.Y);
+                    Canvas.SetLeft(players[i], position.X + World.players[i].RealPosition.X);
+                    Canvas.SetTop(players[i], position.Y + World.players[i].RealPosition.Y);
                 }
                 else
                 {

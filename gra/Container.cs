@@ -31,17 +31,16 @@ namespace gra
         public Container()
         {
             players = new List<Human>();
-            players.Add(new Human(new Point(0, 0), this));
+            players.Add(new Human(new Point(0, 0)));
         }
 
         public void addPlayers()
         {
             for(int i = 1; i < numberOfPlayers; i++)
             {
-                if (i == 0) { players.Add(new Human(new Point(0, 0), this)); }
-                if (i == 1) { players.Add(new Human(new Point(950, 0), this)); }
-                if (i == 2) { players.Add(new Human(new Point(0, 950), this)); }
-                if (i == 3) { players.Add(new Human(new Point(950, 950), this)); }
+                if (i == 1) { players.Add(new Human(new Point(950, 0))); }
+                if (i == 2) { players.Add(new Human(new Point(0, 950))); }
+                if (i == 3) { players.Add(new Human(new Point(950, 950))); }
             }
         }
         
@@ -103,11 +102,25 @@ namespace gra
             FieldSize = Convert.ToInt32(textures.Attributes["textureSize"].Value);
         }
 
-        public void MoveMovables()
+        public void movePLayers()
         {
             for (int i = 0; i < numberOfPlayers; i++)
             {
-                players[i].Move();
+                if(i != index)
+                {
+                    lock(players[i])
+                    {
+                        players[i].setRealDirection();
+                    }
+                }
+            }
+
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                lock(players[i])
+                {
+                    players[i].moveRealPosition();
+                }
             }
         }
     }

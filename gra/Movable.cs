@@ -7,44 +7,24 @@ namespace gra
     {
         public Container World { get; set; }
 
-        public Point Position { get; set; }
+        public Point RealPosition { get; set; }
+        public Vector RealDirection { set; get; }
 
         public BitmapImage Appearance { get; set; }
 
-        private Vector direction;
-        public Vector Direction
+        
+        public void moveRealPosition()
         {
-            set
-            {
-                if(true)
-                {
-                    direction = value;
-                }
-            }
-            get
-            {
-                return direction;
-            }
+            RealPosition += RealDirection;
         }
-
-        public void Move()
-        {
-            if (CanMove())
-            {
-            Position += Direction;
-        }
-    }
-
+        /*
         public bool CanMove()
         {
-            if (IsOutOfMap(Position+Direction))
+            if (IsOutOfMap(RealPosition+Direction))
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         public bool IsOutOfMap(Point newPosition)
@@ -53,5 +33,6 @@ namespace gra
                 newPosition.X + World.FieldSize > World.MapSize * World.FieldSize ||
                 newPosition.Y + World.FieldSize > World.MapSize * World.FieldSize;
         }
+        */
     }
 }

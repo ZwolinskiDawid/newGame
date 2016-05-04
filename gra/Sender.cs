@@ -13,7 +13,7 @@ namespace gra
         public Sender()
         {
             this.sender = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            this.sender.Connect("25.88.205.228", 9998);
+            this.sender.Connect("localhost", 9998);
         }
 
         public void send(int x, int y, int key)

@@ -17,7 +17,7 @@ namespace gra
         public Listener(Container World)
         {
             this.listener = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            this.listener.Connect("25.88.205.228", 9999);
+            this.listener.Connect("localhost", 9999);
             this.World = World;
         }
 
@@ -37,49 +37,41 @@ namespace gra
                 key = (int)buffor[4];
                 index = (int)buffor[5];
 
-                if(key == 8 && (players[index].Position.X != x || players[index].Position.Y != y))
-                {
-                    lock (players[index])
-                    {
-                        players[index].Direction = new Vector(0, 0);
-                    }
-                }
-
-                players[index].Position = new Point((double)x, (double)y);
+                players[index].TargetPosition = new Point((double)x, (double)y);
 
                 if (key == 0)
                 {
                     lock(players[index])
                     {
-                        players[index].Direction = new Vector(0, -3);
+                        players[index].TargetDirection = new Vector(0, -3);
                     }
                 }
                 else if (key == 1)
                 {
                     lock (players[index])
                     {
-                        players[index].Direction = new Vector(0, 3);
+                        players[index].TargetDirection = new Vector(0, 3);
                     }
                 }
                 else if (key == 2)
                 {
                     lock (players[index])
                     {
-                        players[index].Direction = new Vector(3, 0);
+                        players[index].TargetDirection = new Vector(3, 0);
                     }
                 }
                 else if (key == 3)
                 {
                     lock (players[index])
                     {
-                        players[index].Direction = new Vector(-3, 0);
+                        players[index].TargetDirection = new Vector(-3, 0);
                     }
                 }
-                else if (key == 4 || key == 5 || key == 6 || key == 7)
+                else if (key >= 4 && key <= 7)
                 {
                     lock (players[index])
                     {
-                        players[index].Direction = new Vector(0, 0);
+                        players[index].TargetDirection = new Vector(0, 0);
                     }
                 }
             }

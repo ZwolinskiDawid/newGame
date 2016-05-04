@@ -29,10 +29,7 @@ namespace gra
 
         private void MoveMap()
         {
-            World.MoveMovables();
-
-            this.sender.send((int)getPlayerPosition(World.index).X,
-                        (int)getPlayerPosition(World.index).Y, 8);
+            World.movePLayers();
 
             Point position = CenterOfGameScreen;
             position.X -= getPlayerPosition(World.index).X;
@@ -70,25 +67,25 @@ namespace gra
             {
                 if (e.Key == Key.Up)
                 {
-                    World.players[World.index].Direction = new Vector(0, -3);
+                    World.players[World.index].RealDirection = new Vector(0, -3);
                     this.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 0);
                 }
                 else if (e.Key == Key.Down)
                 {
-                    World.players[World.index].Direction = new Vector(0, 3);
+                    World.players[World.index].RealDirection = new Vector(0, 3);
                     this.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 1);
                 }
                 else if (e.Key == Key.Right)
                 {
-                    World.players[World.index].Direction = new Vector(3, 0);
+                    World.players[World.index].RealDirection = new Vector(3, 0);
                     this.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 2);
                 }
                 else if (e.Key == Key.Left)
                 {
-                    World.players[World.index].Direction = new Vector(-3, 0);
+                    World.players[World.index].RealDirection = new Vector(-3, 0);
                     this.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 3);
                 }
@@ -99,27 +96,27 @@ namespace gra
         {
             if (!e.IsRepeat)
             {
-                if (e.Key == Key.Up && World.players[World.index].Direction.Y == -3)
+                if (e.Key == Key.Up && World.players[World.index].RealDirection.Y == -3)
                 {
-                    World.players[World.index].Direction = new Vector(0, 0);
+                    World.players[World.index].RealDirection = new Vector(0, 0);
                     this.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 4);
                 }
-                else if (e.Key == Key.Down && World.players[World.index].Direction.Y == 3)
+                else if (e.Key == Key.Down && World.players[World.index].RealDirection.Y == 3)
                 {
-                    World.players[World.index].Direction = new Vector(0, 0);
+                    World.players[World.index].RealDirection = new Vector(0, 0);
                     this.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 5);
                 }
-                else if (e.Key == Key.Right && World.players[World.index].Direction.X == 3)
+                else if (e.Key == Key.Right && World.players[World.index].RealDirection.X == 3)
                 {
-                    World.players[World.index].Direction = new Vector(0, 0);
+                    World.players[World.index].RealDirection = new Vector(0, 0);
                     this.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 6);
                 }
-                else if (e.Key == Key.Left && World.players[World.index].Direction.X == -3)
+                else if (e.Key == Key.Left && World.players[World.index].RealDirection.X == -3)
                 {
-                    World.players[World.index].Direction = new Vector(0, 0);
+                    World.players[World.index].RealDirection = new Vector(0, 0);
                     this.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 7);
                 }
@@ -172,11 +169,11 @@ namespace gra
             worker2.Start();
         }
 
-        private Point getPlayerPosition(int index)
+        private Point getPlayerPosition(int index) // Real Position
         {
             lock(World.players[index])
             {
-                return World.players[index].Position;
+                return World.players[index].RealPosition;
             }
         }
 

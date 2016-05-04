@@ -9,12 +9,18 @@ namespace gra
 {
     public class Human : Movable
     {
-        public Human(Point p, Container c)
+        public Point TargetPosition { get; set; }
+        public Vector TargetDirection { set; get; }
+
+        public Human(Point Position)
         {
-            Position = p;
+            RealPosition = Position;
+            TargetPosition = Position;
+
+            RealDirection = new Vector(0, 0);
+            TargetDirection = new Vector(0, 0);
+
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
-            Direction = new Vector();
-            World = c;
         }
 
         private BitmapImage LoadTexture(string texturesXmlDir)
@@ -33,6 +39,30 @@ namespace gra
             logo.EndInit();
 
             return logo;
+        }
+
+        public void setRealDirection()
+        {
+            TargetPosition += TargetDirection;
+            double a = TargetPosition.X - RealPosition.X;
+            double b = TargetPosition.Y - RealPosition.Y;
+
+            if (a != 0 && b!= 0)
+            {
+                double c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+                double x = 3 * a / c;
+                double y = x * b / a;
+
+                RealDirection = new Vector(x, y);
+            }
+            else if(a == 0 && b != 0)
+            {
+                RealDirection = new Vector(0, (b>0) ? 3 : -3);
+            }
+            else if(b == 0 && a != 0)
+            {
+                RealDirection = new Vector((a > 0) ? 3 : -3, 0);
+            }
         }
     }
 }
