@@ -125,8 +125,8 @@ namespace gra
 
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
-            World = new Container();
             this.sender = new Sender();
+            World = new Container(this.sender);
             this.listener = new Listener(World);
 
             start.IsEnabled = true;
@@ -204,5 +204,6 @@ namespace gra
                 return new Point(size, size);
             }
         }
+        
     }
 }

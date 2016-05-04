@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace gra
 {
-    class Sender
+    public class Sender
     {
         private Socket sender;
         public Sender()

@@ -12,8 +12,9 @@ namespace gra
         public Point TargetPosition { get; set; }
         public Vector TargetDirection { set; get; }
 
-        public Human(Point Position)
+        public Human(Point Position, Container c)
         {
+            World = c;
             RealPosition = Position;
             TargetPosition = Position;
 
@@ -21,6 +22,7 @@ namespace gra
             TargetDirection = new Vector(0, 0);
 
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
+            Speed = 3;
         }
 
         private BitmapImage LoadTexture(string texturesXmlDir)
