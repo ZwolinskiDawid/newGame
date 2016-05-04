@@ -21,8 +21,8 @@ namespace gra
             }
             else
             {
-                // tutaj wyslac Vector(0,0)
-                //RealDirection = new Vector(0, 0);
+                World.sender.send((int)RealPosition.X, (int)RealPosition.Y, 5);
+                RealDirection = new Vector(0, 0);
             }
         }
         
@@ -34,8 +34,6 @@ namespace gra
             }
             else if (this == World.players[World.index] && CollisionWithObstacles())
             {
-                World.sender.send((int)RealPosition.X, (int)RealPosition.Y, 5);
-                RealDirection = new Vector(0, 0);
                 return false;
             }
             return true;
