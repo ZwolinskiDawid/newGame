@@ -10,10 +10,10 @@ namespace gra
     public class Sender
     {
         private Socket sender;
-        public Sender()
+        public Sender(string ipAdress)
         {
             this.sender = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            this.sender.Connect("localhost", 9998);
+            this.sender.Connect(ipAdress, 9998);
         }
 
         public void send(int x, int y, int key)

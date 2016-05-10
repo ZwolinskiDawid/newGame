@@ -8,8 +8,11 @@
         Title="MainWindow" Height="725" Width="900" Keyboard.PreviewKeyDown="Window_KeyDown" Keyboard.PreviewKeyUp="Window_KeyUp">
     <Grid Margin="0,0,2,0">
         <Canvas x:Name="gameBorder" Margin="5,5,315,19" Background="#FFBDBDBD" ClipToBounds="True" Width="670" Height="675"/>
-        <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="685,5,0,0" VerticalAlignment="Top" Width="76" Click="Connect_Click"/>
-        <Label x:Name="status" Content="Status: No connection" HorizontalAlignment="Left" Margin="685,30,0,0" VerticalAlignment="Top" Width="132"/>
-        <Button x:Name="start" Content="Start Game" HorizontalAlignment="Left" Margin="685,81,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="Start_Game_Click"/>
+        <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="744,47,0,0" VerticalAlignment="Top" Width="76" Click="Connect_Click"/>
+        <Label x:Name="status" Content="Status: No connection" HorizontalAlignment="Left" Margin="697,72,0,0" VerticalAlignment="Top" Width="132"/>
+        <Button x:Name="start" Content="Start Game" HorizontalAlignment="Left" Margin="680,115,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="Start_Game_Click"/>
+        <TextBox x:Name="ipAdress" HorizontalAlignment="Left" Height="23" Margin="744,8,0,0" TextWrapping="Wrap" Text="192.168.137.250" VerticalAlignment="Top" Width="120" />
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Ip Adress:" HorizontalAlignment="Left" Margin="680,5,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

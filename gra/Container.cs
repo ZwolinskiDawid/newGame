@@ -37,15 +37,15 @@ namespace gra
 
         public int numberOfPlayers { get; set; }
 
-        public Container(Canvas gameBorder)
+        public Container(Canvas gameBorder, string ipAdress)
         {
             this.gameBorder = gameBorder;
 
             players = new List<Human>();
             players.Add(new Human(new Point(0, 0), this));
 
-            this.sender = new Sender();
-            this.listener = new Listener(this);
+            this.sender = new Sender(ipAdress);
+            this.listener = new Listener(ipAdress, this);
 
             bullets = new List<Bullet>();
 

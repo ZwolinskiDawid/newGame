@@ -133,7 +133,7 @@ namespace gra
 
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
-            World = new Container(gameBorder);
+            World = new Container(gameBorder, this.ipAdress.Text);
 
             start.IsEnabled = true;
             status.Content = "Status: Connected";

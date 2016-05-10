@@ -14,10 +14,10 @@ namespace gra
         private Socket listener;
         private Container World;
 
-        public Listener(Container World)
+        public Listener(string ipAdress, Container World)
         {
             this.listener = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            this.listener.Connect("localhost", 9999);
+            this.listener.Connect(ipAdress, 9999);
             this.World = World;
         }
 
