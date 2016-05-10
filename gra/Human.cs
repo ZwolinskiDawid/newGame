@@ -11,18 +11,59 @@ namespace gra
     {
         public Point TargetPosition { get; set; }
         public Vector TargetDirection { set; get; }
+        public Vector previousDirection;
 
-        public Human(Point Position, Container c)
+        public new Vector RealDirection
         {
-            World = c;
+            get
+            {
+                return realDirection;
+            }
+            set
+            {
+                previousDirection = realDirection;
+
+                realDirection = value;
+            }
+        }
+
+        public Vector PreviousDirection
+        {
+            get
+            {
+                if(realDirection == new Vector(0, 0))
+                {
+                    return previousDirection;
+                }
+                else
+                {
+                    return realDirection;
+                }
+            }
+            set
+            {
+                previousDirection = value;
+            }
+        }
+
+        public Human(Point Position, Container World)
+        {
             RealPosition = Position;
             TargetPosition = Position;
 
+            this.World = World;
+
             RealDirection = new Vector(0, 0);
             TargetDirection = new Vector(0, 0);
+            previousDirection = new Vector(3, 0);
 
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
-            Speed = 3;
+
+            collisions = new Vector[4];
+            collisions[0] = new Vector(12, 30);
+            collisions[1] = new Vector(45, 30);
+            collisions[2] = new Vector(12, 45);
+            collisions[3] = new Vector(45, 45);
         }
 
         private BitmapImage LoadTexture(string texturesXmlDir)
@@ -64,6 +105,19 @@ namespace gra
             else if(b == 0 && a != 0)
             {
                 RealDirection = new Vector((a > 0) ? 3 : -3, 0);
+            }
+        }
+
+        public void moveRealPosition()
+        {
+            if (this != World.players[World.index] || CanMove(RealPosition, RealDirection, 0))
+            {
+                RealPosition += RealDirection;
+            }
+            else
+            {
+                World.sender.send((int)RealPosition.X, (int)RealPosition.Y, 4);
+                RealDirection = new Vector(0, 0);
             }
         }
     }

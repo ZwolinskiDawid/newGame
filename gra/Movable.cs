@@ -1,104 +1,69 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace gra
 {
     public class Movable
     {
-        public double Speed { get; set; }
         public Container World { get; set; }
-        public Point RealPosition { get; set; }
-        public Vector RealDirection { set; get; }
-        public BitmapImage Appearance { get; set; }
 
-        
-        public void moveRealPosition()
+        public Point RealPosition { get; set; }
+        public Vector realDirection;
+
+        public BitmapImage Appearance { get; set; }
+        public Vector[] collisions { get; set; }
+
+        public Vector RealDirection
         {
-            if (CanMove())
+            get
             {
-                RealPosition += RealDirection;
+                return realDirection;
+            }
+
+            set
+            {
+                realDirection = value;
+            }
+        }
+
+        public bool CanMove(Point RealPosition, Vector RealDirection, int margin)
+        {
+            if (IsOutOfMap(RealPosition, RealDirection, margin) || CollisionWithObstacles(RealPosition, RealDirection))
+            {
+                return false;
             }
             else
             {
-                World.sender.send((int)RealPosition.X, (int)RealPosition.Y, 5);
-                RealDirection = new Vector(0, 0);
+                return true;
             }
-        }
-        
-        public bool CanMove()
-        {
-            if (IsOutOfMap())
-            {
-                return false;
-            }
-            else if (this == World.players[World.index] && CollisionWithObstacles())
-            {
-                return false;
-            }
-            return true;
         }
 
-        private bool IsOutOfMap()
+        protected bool IsOutOfMap(Point RealPosition, Vector RealDirection, int margin)
         {
             Point newPosition = RealPosition + RealDirection;
-            return newPosition.X < 0 || newPosition.Y < 0 ||
-                newPosition.X + World.FieldSize > World.MapSize * World.FieldSize ||
-                newPosition.Y + World.FieldSize > World.MapSize * World.FieldSize;
-        }
-        
-        private bool CollisionWithObstacles()
-        {
-            Point newPosition = RealPosition + RealDirection;
-            Point playerCenter = new Point(newPosition.X + World.FieldSize / 2, newPosition.Y + World.FieldSize / 2);
-            Point playerPositionIndex = new Point((int)playerCenter.X / World.FieldSize, (int)playerCenter.Y / World.FieldSize);
-
-            if (RealDirection.X == 0)
-            {
-                Point obstaclePositionIndex = new Point(playerPositionIndex.X + 1,
-                                                    playerPositionIndex.Y + RealDirection.Y / Speed);
-                if (CheckObstacle(obstaclePositionIndex, playerCenter)) return true;
-
-                obstaclePositionIndex = new Point(playerPositionIndex.X,
-                                                    playerPositionIndex.Y + RealDirection.Y / Speed);
-                if (CheckObstacle(obstaclePositionIndex, playerCenter)) return true;
-                obstaclePositionIndex = new Point(playerPositionIndex.X - 1,
-                                                    playerPositionIndex.Y + RealDirection.Y / Speed);
-                if (CheckObstacle(obstaclePositionIndex, playerCenter)) return true;
-            }
-            else if(RealDirection.Y == 0)
-            {
-                Point obstaclePositionIndex = new Point(playerPositionIndex.X + RealDirection.X / Speed,
-                                                    playerPositionIndex.Y + 1);
-                if (CheckObstacle(obstaclePositionIndex, playerCenter)) return true;
-
-                obstaclePositionIndex = new Point(playerPositionIndex.X + RealDirection.X / Speed,
-                                                    playerPositionIndex.Y);
-                if (CheckObstacle(obstaclePositionIndex, playerCenter)) return true;
-                obstaclePositionIndex = new Point(playerPositionIndex.X + RealDirection.X / Speed,
-                                                    playerPositionIndex.Y - 1);
-                if (CheckObstacle(obstaclePositionIndex, playerCenter)) return true;
-            }
-            return false;
+            return newPosition.X < -margin || newPosition.Y < -margin || 
+                newPosition.X + World.FieldSize > World.MapSize * World.FieldSize + margin || 
+                newPosition.Y + World.FieldSize > World.MapSize * World.FieldSize + margin;
         }
 
-        private bool CheckObstacle(Point obstaclePositionIndex, Point playerCenter)
+        protected bool CollisionWithObstacles(Point RealPosition, Vector RealDirection)
         {
-            if (obstaclePositionIndex.Y >= 0 && obstaclePositionIndex.Y < World.MapSize && obstaclePositionIndex.X >= 0 &&
-                obstaclePositionIndex.X < World.MapSize)
+            Point newPosition = RealPosition + RealDirection, tmp;
+            int x, y;
+
+            for(int i = 0; i < 4; i++)
             {
-                if (World.MapOfObstacles[(int)obstaclePositionIndex.Y, (int)obstaclePositionIndex.X] != null)
+                tmp = newPosition + collisions[i];
+
+                x = (int)(tmp.X / World.FieldSize);
+                y = (int)(tmp.Y / World.FieldSize);
+
+                if (World.MapOfObstacles[y, x] != null)
                 {
-                    Point obstacleCenter = new Point(obstaclePositionIndex.X * World.FieldSize + World.FieldSize / 2,
-                                                     obstaclePositionIndex.Y * World.FieldSize + World.FieldSize / 2);
-                    double delta = Math.Sqrt(Math.Pow(obstacleCenter.X - playerCenter.X, 2) +
-                                             Math.Pow(obstacleCenter.Y - playerCenter.Y, 2));
-                    if (delta <= World.FieldSize * 0.8)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
+
             return false;
         }
     }

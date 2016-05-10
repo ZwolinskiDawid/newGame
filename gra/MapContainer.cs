@@ -15,6 +15,7 @@ namespace gra
     {
         public Image image { get; set; }
         public List<Image> players { get; set; }
+        public List<Image> bullets { get; set; }
         public List<System.Drawing.Image> Textures { get; set; }
 
         public MapContainer(Container World, Point position)
@@ -22,6 +23,7 @@ namespace gra
             LoadTextures(@"..\..\Resources\textures.xml");
             CreateMap(World);
             players = new List<Image>();
+            bullets = new List<Image>();
         }
 
         public void CreateMap(Container World)
@@ -70,7 +72,7 @@ namespace gra
                 players[i].Height = World.FieldSize;
                 players[i].Source = World.players[i].Appearance;
 
-                if(i != World.index)
+                if (i != World.index)
                 {
                     Canvas.SetLeft(players[i], position.X + World.players[i].RealPosition.X);
                     Canvas.SetTop(players[i], position.Y + World.players[i].RealPosition.Y);
@@ -96,6 +98,22 @@ namespace gra
             foreach (XmlNode texture in textureList)
             {
                 Textures.Add(System.Drawing.Image.FromFile(texture.InnerText));
+            }
+        }
+
+        public void addBullet(Container World, Point position)
+        {
+            lock(bullets)
+            {
+                int i = bullets.Count;
+
+                bullets.Add(new Image());
+                bullets[i].Width = World.FieldSize;
+                bullets[i].Height = World.FieldSize;
+                bullets[i].Source = World.bullets[i].Appearance;
+
+                Canvas.SetLeft(bullets[i], position.X + World.bullets[i].RealPosition.X);
+                Canvas.SetTop(bullets[i], position.Y + World.bullets[i].RealPosition.Y);
             }
         }
     }

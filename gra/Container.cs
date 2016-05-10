@@ -6,12 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 
 namespace gra
 {
     public class Container
     {
+        public List<dynamic> BulletsToAdd;
+
+        public List<Vector> Directions;
+
+        Canvas gameBorder;
+        public Sender sender { get; private set; }
+        public Listener listener { get; private set; }
         public MapContainer mapContainer { get; set; }
 
         public int[,] Map { get; set; }
@@ -23,18 +31,32 @@ namespace gra
         public int FieldSize { get; set; }
 
         public List<Human> players { get; set; }
+        public List<Bullet> bullets { get; set; }
 
         public int index { get; set; }
 
         public int numberOfPlayers { get; set; }
 
-        public Sender sender { get; set; }
-
-        public Container(Sender s)
+        public Container(Canvas gameBorder)
         {
-            sender = s;
+            this.gameBorder = gameBorder;
+
             players = new List<Human>();
             players.Add(new Human(new Point(0, 0), this));
+
+            this.sender = new Sender();
+            this.listener = new Listener(this);
+
+            bullets = new List<Bullet>();
+
+            Directions = new List<Vector>();
+            Directions.Add(new Vector(0, -3));
+            Directions.Add(new Vector(0, 3));
+            Directions.Add(new Vector(3, 0));
+            Directions.Add(new Vector(-3, 0));
+            Directions.Add(new Vector(0, 0));
+
+            BulletsToAdd = new List<dynamic>();
         }
 
         public void addPlayers()
@@ -45,6 +67,18 @@ namespace gra
                 if (i == 2) { players.Add(new Human(new Point(0, 950), this)); }
                 if (i == 3) { players.Add(new Human(new Point(950, 950), this)); }
             }
+        }
+
+        public void addBullet(Point CenterOfGameScreen, Point Position, Vector Direction)
+        {
+            bullets.Add(new Bullet(Position, Direction, this));
+
+            Point position = CenterOfGameScreen;
+            position.X -= players[index].RealPosition.X;
+            position.Y -= players[index].RealPosition.Y;
+
+            mapContainer.addBullet(this, position);
+            gameBorder.Children.Add(mapContainer.bullets[mapContainer.bullets.Count - 1]);
         }
         
         public void CreateMap(Point position)
@@ -124,6 +158,54 @@ namespace gra
                 {
                     players[i].moveRealPosition();
                 }
+            }
+        }
+
+        public void moveBullets()
+        {
+            List<Bullet> toRemove = new List<Bullet>();
+
+            foreach (Bullet bullet in bullets)
+            {
+                if(bullet.moveAndCheck())
+                {
+                    bullet.RealPosition += bullet.RealDirection;
+                }
+                else
+                {
+                    toRemove.Add(bullet);
+                }
+            }
+
+            foreach(Bullet bullet in toRemove)
+            {
+                int index = bullets.IndexOf(bullet);
+
+                Image image = mapContainer.bullets[index];
+                gameBorder.Children.Remove(image);
+
+                mapContainer.bullets.Remove(image);
+                bullets.Remove(bullet);
+            }
+        }
+
+        public void addBullets(Point CenterOfGameScreen)
+        {
+            lock(BulletsToAdd)
+            {
+                foreach(dynamic bullet in BulletsToAdd)
+                {
+                    bullets.Add(new Bullet(bullet.Position, bullet.Direction, this));
+
+                    Point position = CenterOfGameScreen;
+                    position.X -= players[index].RealPosition.X;
+                    position.Y -= players[index].RealPosition.Y;
+
+                    mapContainer.addBullet(this, position);
+                    gameBorder.Children.Add(mapContainer.bullets[mapContainer.bullets.Count - 1]);
+                }
+
+                BulletsToAdd.Clear();
             }
         }
     }

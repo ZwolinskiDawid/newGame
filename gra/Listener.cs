@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace gra
 {
-    class Listener
+    public class Listener
     {
         private Socket listener;
         private Container World;
@@ -37,41 +37,23 @@ namespace gra
                 key = (int)buffor[4];
                 index = (int)buffor[5];
 
-                players[index].TargetPosition = new Point((double)x, (double)y);
+                if(key < 10)
+                {
+                    players[index].TargetPosition = new Point((double)x, (double)y);
 
-                if (key == 0)
-                {
-                    lock(players[index])
-                    {
-                        players[index].TargetDirection = new Vector(0, -3);
-                    }
-                }
-                else if (key == 1)
-                {
                     lock (players[index])
                     {
-                        players[index].TargetDirection = new Vector(0, 3);
+                        players[index].TargetDirection = World.Directions[key];
                     }
                 }
-                else if (key == 2)
+                else
                 {
-                    lock (players[index])
+                    lock(World.BulletsToAdd)
                     {
-                        players[index].TargetDirection = new Vector(3, 0);
-                    }
-                }
-                else if (key == 3)
-                {
-                    lock (players[index])
-                    {
-                        players[index].TargetDirection = new Vector(-3, 0);
-                    }
-                }
-                else if (key >= 4 && key <= 7)
-                {
-                    lock (players[index])
-                    {
-                        players[index].TargetDirection = new Vector(0, 0);
+                        World.BulletsToAdd.Add(new {
+                            Position = new Point(x, y),
+                            Direction = World.Directions[key - 10]
+                        });
                     }
                 }
             }

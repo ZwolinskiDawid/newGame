@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.ComponentModel;
+using System;
 
 namespace gra
 {
@@ -10,8 +11,7 @@ namespace gra
     {
         private Container World;
         private delegate void handler(); //allow to change ui
-        private Sender sender;
-        private Listener listener;
+        private delegate void handler2(); //allow to change ui
 
         public MainWindow()
         {
@@ -30,6 +30,8 @@ namespace gra
         private void MoveMap()
         {
             World.movePLayers();
+            World.addBullets(CenterOfGameScreen);
+            World.moveBullets();
 
             Point position = CenterOfGameScreen;
             position.X -= getPlayerPosition(World.index).X;
@@ -48,17 +50,15 @@ namespace gra
                 }
             }
 
-            /*
             //=============MOVE BULLETS===============
-            for (int i = 0; i < World.numberOfPlayers; i++)
+            lock(World.mapContainer.bullets)
             {
-                if(i != World.index)
+                for (int i = 0; i < World.bullets.Count; i++)
                 {
-                    Canvas.SetLeft(getPlayerImage(i), position.X + getPlayerPosition(i).X);
-                    Canvas.SetTop(getPlayerImage(i), position.Y + getPlayerPosition(i).Y);
+                    Canvas.SetLeft(World.mapContainer.bullets[i], position.X + World.bullets[i].RealPosition.X);
+                    Canvas.SetTop(World.mapContainer.bullets[i], position.Y + World.bullets[i].RealPosition.Y);
                 }
             }
-            */
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -68,26 +68,34 @@ namespace gra
                 if (e.Key == Key.Up)
                 {
                     World.players[World.index].RealDirection = new Vector(0, -3);
-                    this.sender.send((int)getPlayerPosition(World.index).X,
+                    World.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 0);
                 }
                 else if (e.Key == Key.Down)
                 {
                     World.players[World.index].RealDirection = new Vector(0, 3);
-                    this.sender.send((int)getPlayerPosition(World.index).X,
+                    World.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 1);
                 }
                 else if (e.Key == Key.Right)
                 {
                     World.players[World.index].RealDirection = new Vector(3, 0);
-                    this.sender.send((int)getPlayerPosition(World.index).X,
+                    World.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 2);
                 }
                 else if (e.Key == Key.Left)
                 {
                     World.players[World.index].RealDirection = new Vector(-3, 0);
-                    this.sender.send((int)getPlayerPosition(World.index).X,
+                    World.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 3);
+                }
+                else if(e.Key == Key.Space)
+                {
+                    World.addBullet(CenterOfGameScreen, getPlayerPosition(World.index), World.players[World.index].PreviousDirection);
+
+                    World.sender.send((int)getPlayerPosition(World.index).X,
+                                      (int)getPlayerPosition(World.index).Y,
+                                       World.Directions.IndexOf(World.players[World.index].PreviousDirection) + 10);
                 }
             }
         }
@@ -99,35 +107,33 @@ namespace gra
                 if (e.Key == Key.Up && World.players[World.index].RealDirection.Y == -3)
                 {
                     World.players[World.index].RealDirection = new Vector(0, 0);
-                    this.sender.send((int)getPlayerPosition(World.index).X,
+                    World.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 4);
                 }
                 else if (e.Key == Key.Down && World.players[World.index].RealDirection.Y == 3)
                 {
                     World.players[World.index].RealDirection = new Vector(0, 0);
-                    this.sender.send((int)getPlayerPosition(World.index).X,
-                        (int)getPlayerPosition(World.index).Y, 5);
+                    World.sender.send((int)getPlayerPosition(World.index).X,
+                        (int)getPlayerPosition(World.index).Y, 4);
                 }
                 else if (e.Key == Key.Right && World.players[World.index].RealDirection.X == 3)
                 {
                     World.players[World.index].RealDirection = new Vector(0, 0);
-                    this.sender.send((int)getPlayerPosition(World.index).X,
-                        (int)getPlayerPosition(World.index).Y, 6);
+                    World.sender.send((int)getPlayerPosition(World.index).X,
+                        (int)getPlayerPosition(World.index).Y, 4);
                 }
                 else if (e.Key == Key.Left && World.players[World.index].RealDirection.X == -3)
                 {
                     World.players[World.index].RealDirection = new Vector(0, 0);
-                    this.sender.send((int)getPlayerPosition(World.index).X,
-                        (int)getPlayerPosition(World.index).Y, 7);
+                    World.sender.send((int)getPlayerPosition(World.index).X,
+                        (int)getPlayerPosition(World.index).Y, 4);
                 }
             }
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
-            this.sender = new Sender();
-            World = new Container(this.sender);
-            this.listener = new Listener(World);
+            World = new Container(gameBorder);
 
             start.IsEnabled = true;
             status.Content = "Status: Connected";
@@ -136,23 +142,23 @@ namespace gra
 
         private void Start_Game_Click(object sender, RoutedEventArgs e)
         {
-            listener.receive_Map();
+            start.IsEnabled = false;
+
+            World.listener.receive_Map();
 
             World.CreateMap(CenterOfGameScreen);
 
-            World.index = listener.receive_Int();
-            World.numberOfPlayers = listener.receive_Int();
+            World.index = World.listener.receive_Int();
+            World.numberOfPlayers = World.listener.receive_Int();
             World.addPlayers();
             World.mapContainer.CreatePlayer(World, CenterOfGameScreen);
-
-            start.IsEnabled = false;
 
             //============SWITCH ON MAP===============
 
             MoveMap();
 
             gameBorder.Children.Add(mapImage);
-            for(int i = 0; i < World.numberOfPlayers; i++)
+            for (int i = 0; i < World.numberOfPlayers; i++)
             {
                 gameBorder.Children.Add(World.mapContainer.players[i]);
             }
@@ -165,7 +171,8 @@ namespace gra
 
             //========NEW THREAD = LISTENER===============
 
-            Thread worker2 = new Thread(new ThreadStart(this.listener.listen));
+            Thread worker2 = new Thread(new ThreadStart(World.listener.listen));
+            worker2.IsBackground = true;
             worker2.Start();
         }
 
@@ -204,6 +211,5 @@ namespace gra
                 return new Point(size, size);
             }
         }
-        
     }
 }

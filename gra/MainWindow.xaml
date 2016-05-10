@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gra"
         mc:Ignorable="d"
-        Title="MainWindow" Height="657" Width="700" Keyboard.PreviewKeyDown="Window_KeyDown" Keyboard.PreviewKeyUp="Window_KeyUp">
+        Title="MainWindow" Height="725" Width="900" Keyboard.PreviewKeyDown="Window_KeyDown" Keyboard.PreviewKeyUp="Window_KeyUp">
     <Grid Margin="0,0,2,0">
-        <Canvas x:Name="gameBorder" Margin="10,10,649,286" Background="#FFBDBDBD" ClipToBounds="True" Width="500" Height="500"/>
-        <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="515,10,0,0" VerticalAlignment="Top" Width="75" Click="Connect_Click"/>
-        <Label x:Name="status" Content="Status: No connection" HorizontalAlignment="Left" Margin="515,35,0,0" VerticalAlignment="Top" Width="132"/>
-        <Button x:Name="start" Content="Start Game" HorizontalAlignment="Left" Margin="515,77,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="Start_Game_Click"/>
+        <Canvas x:Name="gameBorder" Margin="5,5,315,19" Background="#FFBDBDBD" ClipToBounds="True" Width="670" Height="675"/>
+        <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="685,5,0,0" VerticalAlignment="Top" Width="76" Click="Connect_Click"/>
+        <Label x:Name="status" Content="Status: No connection" HorizontalAlignment="Left" Margin="685,30,0,0" VerticalAlignment="Top" Width="132"/>
+        <Button x:Name="start" Content="Start Game" HorizontalAlignment="Left" Margin="685,81,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="Start_Game_Click"/>
     </Grid>
 </Window>

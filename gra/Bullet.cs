@@ -7,16 +7,32 @@ using System.IO;
 
 namespace gra
 {
-    class Bullet : Movable
+    public class Bullet : Movable
     {
-        public Bullet(Point p, Vector d, Container c)
+        public Bullet(Point position, Vector direction, Container World)
         {
-            /*
-            Position = p;
-            Direction = d;
+            RealPosition = position;
+            RealDirection = direction;
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
-            World = c;
-            */
+            this.World = World;
+
+            collisions = new Vector[4];
+            collisions[0] = new Vector(15, 30);
+            collisions[1] = new Vector(30, 30);
+            collisions[2] = new Vector(15, 35);
+            collisions[3] = new Vector(30, 35);
+        }
+
+        public new Vector RealDirection
+        {
+            get
+            {
+                return realDirection;
+            }
+            set
+            {
+                realDirection = 2 * value;
+            }
         }
 
         private BitmapImage LoadTexture(string texturesXmlDir)
@@ -35,6 +51,18 @@ namespace gra
             logo.EndInit();
 
             return logo;
+        }
+
+        public bool moveAndCheck()
+        {
+            if (CanMove(RealPosition, RealDirection, 15))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
