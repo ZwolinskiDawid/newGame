@@ -13,6 +13,8 @@ namespace gra
 {
     public class Container
     {
+        public Results Result { get; private set; }
+
         public List<dynamic> BulletsToAdd;
 
         public List<Vector> Directions;
@@ -57,6 +59,8 @@ namespace gra
             Directions.Add(new Vector(0, 0));
 
             BulletsToAdd = new List<dynamic>();
+
+            Result = new Results();
         }
 
         public void addPlayers()

@@ -11,11 +11,16 @@ namespace gra
     {
         private Container World;
         private delegate void handler(); //allow to change ui
-        private delegate void handler2(); //allow to change ui
 
         public MainWindow()
         {
             InitializeComponent();
+
+            for (int i = 0; i < 4; i++)
+            {
+                getLabelOfPlayers(i).Visibility = Visibility.Hidden;
+                getLabelOfResults(i).Visibility = Visibility.Hidden;
+            }
         }
 
         private void DoWork()
@@ -57,6 +62,14 @@ namespace gra
                 {
                     Canvas.SetLeft(World.mapContainer.bullets[i], position.X + World.bullets[i].RealPosition.X);
                     Canvas.SetTop(World.mapContainer.bullets[i], position.Y + World.bullets[i].RealPosition.Y);
+                }
+            }
+
+            for (int i = 0; i < World.numberOfPlayers; i++)
+            {
+                lock(World.Result)
+                {
+                    getLabelOfResults(i).Content = World.Result.Result[i].ToString();
                 }
             }
         }
@@ -153,6 +166,21 @@ namespace gra
             World.addPlayers();
             World.mapContainer.CreatePlayer(World, CenterOfGameScreen);
 
+            for (int i = 0; i < 4; i++)
+            {
+                if (i < World.numberOfPlayers)
+                {
+                    getLabelOfPlayers(i).Visibility = Visibility.Visible;
+                    getLabelOfResults(i).Visibility = Visibility.Visible;
+                    getLabelOfResults(i).Content = World.Result.Result[i].ToString();
+                }
+                else
+                {
+                    getLabelOfPlayers(i).Visibility = Visibility.Hidden;
+                    getLabelOfResults(i).Visibility = Visibility.Hidden;
+                }
+            }
+
             //============SWITCH ON MAP===============
 
             MoveMap();
@@ -174,6 +202,22 @@ namespace gra
             Thread worker2 = new Thread(new ThreadStart(World.listener.listen));
             worker2.IsBackground = true;
             worker2.Start();
+        }
+
+        private Label getLabelOfPlayers(int index)
+        {
+            if (index == 0) { return this.player0; }
+            else if (index == 1) { return this.player1; }
+            else if (index == 2) { return this.player2; }
+            else { return this.player3; }
+        }
+
+        private Label getLabelOfResults(int index)
+        {
+            if (index == 0) { return this.result0; }
+            else if (index == 1) { return this.result1; }
+            else if (index == 2) { return this.result2; }
+            else { return this.result3; }
         }
 
         private Point getPlayerPosition(int index) // Real Position

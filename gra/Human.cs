@@ -128,6 +128,11 @@ namespace gra
 
             this.RealDirection = new Vector(0, 0);
             this.TargetDirection = new Vector(0, 0);
+
+            lock(World.Result)
+            {
+                World.Result.addPoint(whoKill);
+            }
         }
     }
 }

@@ -59,7 +59,7 @@ namespace gra
 
         public bool moveAndCheck()
         {
-            if (CanMove(RealPosition, RealDirection, 15))
+            if (CanMove(RealPosition, RealDirection, 14))
             {
                 return true;
             }
