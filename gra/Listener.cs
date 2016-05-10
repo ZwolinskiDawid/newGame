@@ -37,12 +37,19 @@ namespace gra
                 key = (int)buffor[4];
                 index = (int)buffor[5];
 
-                if(key < 10)
+                if(key == 20)
                 {
-                    players[index].TargetPosition = new Point((double)x, (double)y);
+                    lock (players[index])
+                    {
+                        players[index].isDead(y, x);
+                    }
+                }
+                else if(key < 10)
+                {
 
                     lock (players[index])
                     {
+                        players[index].TargetPosition = new Point((double)x, (double)y);
                         players[index].TargetDirection = World.Directions[key];
                     }
                 }
@@ -52,7 +59,8 @@ namespace gra
                     {
                         World.BulletsToAdd.Add(new {
                             Position = new Point(x, y),
-                            Direction = World.Directions[key - 10]
+                            Direction = World.Directions[key - 10],
+                            Owner = index
                         });
                     }
                 }

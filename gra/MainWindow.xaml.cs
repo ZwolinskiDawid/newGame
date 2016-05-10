@@ -136,7 +136,7 @@ namespace gra
             World = new Container(gameBorder, this.ipAdress.Text);
 
             start.IsEnabled = true;
-            status.Content = "Status: Connected";
+            status.Content = "Status:   Connected";
             connect.IsEnabled = false;
         }
 

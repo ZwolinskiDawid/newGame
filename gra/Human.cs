@@ -120,5 +120,14 @@ namespace gra
                 RealDirection = new Vector(0, 0);
             }
         }
+
+        public void isDead(int whoKill, int corner)
+        {
+            this.RealPosition = World.getCorner(corner);
+            this.TargetPosition = World.getCorner(corner);
+
+            this.RealDirection = new Vector(0, 0);
+            this.TargetDirection = new Vector(0, 0);
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace gra
             this.gameBorder = gameBorder;
 
             players = new List<Human>();
-            players.Add(new Human(new Point(0, 0), this));
+            players.Add(new Human(getCorner(0), this));
 
             this.sender = new Sender(ipAdress);
             this.listener = new Listener(ipAdress, this);
@@ -63,15 +63,23 @@ namespace gra
         {
             for(int i = 1; i < numberOfPlayers; i++)
             {
-                if (i == 1) { players.Add(new Human(new Point(950, 0), this)); }
-                if (i == 2) { players.Add(new Human(new Point(0, 950), this)); }
-                if (i == 3) { players.Add(new Human(new Point(950, 950), this)); }
+                if (i == 1) { players.Add(new Human(getCorner(1), this)); }
+                if (i == 2) { players.Add(new Human(getCorner(2), this)); }
+                if (i == 3) { players.Add(new Human(getCorner(3), this)); }
             }
+        }
+
+        public Point getCorner(int index)
+        {
+            if (index == 0) { return new Point(0, 0); }
+            else if (index == 1) { return new Point(950, 0); }
+            else if (index == 2) { return new Point(0, 950); }
+            else { return new Point(950, 950); }
         }
 
         public void addBullet(Point CenterOfGameScreen, Point Position, Vector Direction)
         {
-            bullets.Add(new Bullet(Position, Direction, this));
+            bullets.Add(new Bullet(Position, Direction, this, index));
 
             Point position = CenterOfGameScreen;
             position.X -= players[index].RealPosition.X;
@@ -169,6 +177,14 @@ namespace gra
             {
                 if(bullet.moveAndCheck())
                 {
+                    if(bullet.Owner != index)
+                    {
+                        lock (players[index])
+                        {
+                            bullet.collisionWithPlayer(players[index].RealPosition);
+                        }
+                    }
+
                     bullet.RealPosition += bullet.RealDirection;
                 }
                 else
@@ -195,7 +211,7 @@ namespace gra
             {
                 foreach(dynamic bullet in BulletsToAdd)
                 {
-                    bullets.Add(new Bullet(bullet.Position, bullet.Direction, this));
+                    bullets.Add(new Bullet(bullet.Position, bullet.Direction, this, bullet.Owner));
 
                     Point position = CenterOfGameScreen;
                     position.X -= players[index].RealPosition.X;
