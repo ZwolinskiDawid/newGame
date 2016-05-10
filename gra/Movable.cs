@@ -28,7 +28,11 @@ namespace gra
 
         public bool CanMove(Point RealPosition, Vector RealDirection, int margin)
         {
-            if (IsOutOfMap(RealPosition, RealDirection, margin) || CollisionWithObstacles(RealPosition, RealDirection))
+            if (IsOutOfMap(RealPosition, RealDirection, margin))
+            {
+                return false;
+            }
+            else if(CollisionWithObstacles(RealPosition, RealDirection))
             {
                 return false;
             }
