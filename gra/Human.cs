@@ -11,40 +11,6 @@ namespace gra
     {
         public Point TargetPosition { get; set; }
         public Vector TargetDirection { set; get; }
-        public Vector previousDirection;
-
-        public new Vector RealDirection
-        {
-            get
-            {
-                return realDirection;
-            }
-            set
-            {
-                previousDirection = realDirection;
-
-                realDirection = value;
-            }
-        }
-
-        public Vector PreviousDirection
-        {
-            get
-            {
-                if(realDirection == new Vector(0, 0))
-                {
-                    return previousDirection;
-                }
-                else
-                {
-                    return realDirection;
-                }
-            }
-            set
-            {
-                previousDirection = value;
-            }
-        }
 
         public Human(Point Position, Container World)
         {
@@ -55,7 +21,6 @@ namespace gra
 
             RealDirection = new Vector(0, 0);
             TargetDirection = new Vector(0, 0);
-            previousDirection = new Vector(3, 0);
 
             Appearance = LoadTexture(@"..\..\Resources\textures.xml");
 

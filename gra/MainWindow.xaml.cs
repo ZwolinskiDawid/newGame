@@ -11,6 +11,7 @@ namespace gra
     {
         private Container World;
         private delegate void handler(); //allow to change ui
+        private delegate void handler2(dynamic Name); //allow to change ui // for setting names
 
         public MainWindow()
         {
@@ -102,13 +103,37 @@ namespace gra
                     World.sender.send((int)getPlayerPosition(World.index).X,
                         (int)getPlayerPosition(World.index).Y, 3);
                 }
-                else if(e.Key == Key.Space)
+                else if(e.Key == Key.W)
                 {
-                    World.addBullet(CenterOfGameScreen, getPlayerPosition(World.index), World.players[World.index].PreviousDirection);
+                    World.addBullet(CenterOfGameScreen, getPlayerPosition(World.index), new Vector(0, -3));
 
                     World.sender.send((int)getPlayerPosition(World.index).X,
                                       (int)getPlayerPosition(World.index).Y,
-                                       World.Directions.IndexOf(World.players[World.index].PreviousDirection) + 10);
+                                       World.Directions.IndexOf(new Vector(0, -3)) + 10);
+                }
+                else if (e.Key == Key.S)
+                {
+                    World.addBullet(CenterOfGameScreen, getPlayerPosition(World.index), new Vector(0, 3));
+
+                    World.sender.send((int)getPlayerPosition(World.index).X,
+                                      (int)getPlayerPosition(World.index).Y,
+                                       World.Directions.IndexOf(new Vector(0, 3)) + 10);
+                }
+                else if (e.Key == Key.A)
+                {
+                    World.addBullet(CenterOfGameScreen, getPlayerPosition(World.index), new Vector(-3, 0));
+
+                    World.sender.send((int)getPlayerPosition(World.index).X,
+                                      (int)getPlayerPosition(World.index).Y,
+                                       World.Directions.IndexOf(new Vector(-3, 0)) + 10);
+                }
+                else if (e.Key == Key.D)
+                {
+                    World.addBullet(CenterOfGameScreen, getPlayerPosition(World.index), new Vector(3, 0));
+
+                    World.sender.send((int)getPlayerPosition(World.index).X,
+                                      (int)getPlayerPosition(World.index).Y,
+                                       World.Directions.IndexOf(new Vector(3, 0)) + 10);
                 }
             }
         }
@@ -149,7 +174,7 @@ namespace gra
             World = new Container(gameBorder, this.ipAdress.Text);
 
             start.IsEnabled = true;
-            status.Content = "Status:   Connected";
+            status.Content = "Connected";
             connect.IsEnabled = false;
         }
 
@@ -157,39 +182,33 @@ namespace gra
         {
             start.IsEnabled = false;
 
+            Thread worker = new Thread(new ThreadStart(startGame));
+            worker.IsBackground = true;
+            worker.Start();
+        }
+
+        private void startGame()
+        {
             World.listener.receive_Map();
 
-            World.CreateMap(CenterOfGameScreen);
+            this.Dispatcher.Invoke(new handler(createMap), new object[] { });
 
             World.index = World.listener.receive_Int();
             World.numberOfPlayers = World.listener.receive_Int();
-            World.addPlayers();
-            World.mapContainer.CreatePlayer(World, CenterOfGameScreen);
 
-            for (int i = 0; i < 4; i++)
+            this.Dispatcher.Invoke(new handler(createPlayerThread), new object[] { });
+
+            this.Dispatcher.Invoke(new handler(sendNickName), new object[] { });
+
+            for(int i=0;i<World.numberOfPlayers - 1;i++)
             {
-                if (i < World.numberOfPlayers)
-                {
-                    getLabelOfPlayers(i).Visibility = Visibility.Visible;
-                    getLabelOfResults(i).Visibility = Visibility.Visible;
-                    getLabelOfResults(i).Content = World.Result.Result[i].ToString();
-                }
-                else
-                {
-                    getLabelOfPlayers(i).Visibility = Visibility.Hidden;
-                    getLabelOfResults(i).Visibility = Visibility.Hidden;
-                }
+                dynamic Name = World.listener.receiveNickName();
+                this.Dispatcher.Invoke(new handler2(setNickNames), new object[] { Name });
             }
 
             //============SWITCH ON MAP===============
 
-            MoveMap();
-
-            gameBorder.Children.Add(mapImage);
-            for (int i = 0; i < World.numberOfPlayers; i++)
-            {
-                gameBorder.Children.Add(World.mapContainer.players[i]);
-            }
+            this.Dispatcher.Invoke(new handler(switchOnMap), new object[] { });
 
             //========NEW THREAD HANDLING MAP==========
 
@@ -202,6 +221,53 @@ namespace gra
             Thread worker2 = new Thread(new ThreadStart(World.listener.listen));
             worker2.IsBackground = true;
             worker2.Start();
+        }
+
+        private void createMap()
+        {
+            World.CreateMap(CenterOfGameScreen);
+        }
+
+        private void createPlayerThread()
+        {
+            World.addPlayers();
+            World.mapContainer.CreatePlayer(World, CenterOfGameScreen);
+        }
+
+        private void sendNickName()
+        {
+            getLabelOfPlayers(World.index).Content = this.NickName.Text;
+
+            World.sender.sendNickName(this.NickName.Text);
+        }
+
+        private void setNickNames(dynamic Name)
+        {
+            getLabelOfPlayers(Name.index).Content = Name.NickName + ":";
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (i < World.numberOfPlayers)
+                {
+                    getLabelOfPlayers(i).Visibility = Visibility.Visible;
+                    getLabelOfResults(i).Visibility = Visibility.Visible;
+                    getLabelOfResults(i).Content = World.Result.Result[i].ToString();
+                }
+            }
+        }
+
+        private void switchOnMap()
+        {
+            MoveMap();
+
+            gameBorder.Children.Add(mapImage);
+            for (int i = 0; i < World.numberOfPlayers; i++)
+            {
+                gameBorder.Children.Add(World.mapContainer.players[i]);
+            }
+
+            this.PreviewKeyDown += Window_KeyDown;
+            this.PreviewKeyUp += Window_KeyUp;
         }
 
         private Label getLabelOfPlayers(int index)

@@ -91,6 +91,7 @@ namespace gra
             }
 
             System.IO.File.WriteAllText(@"..\..\Resources\container.xml", map);
+            
         }
 
         public int receive_Int()
@@ -104,6 +105,23 @@ namespace gra
             }
 
             return BitConverter.ToInt32(buffor, 0);
+        }
+
+        public dynamic receiveNickName()
+        {
+            byte[] len = new byte[2];
+            this.listener.Receive(len);
+
+            byte[] bytes = new byte[(int)len[1]];
+            this.listener.Receive(bytes);
+
+            char[] chars = new char[bytes.Length / sizeof(char)];
+            System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+
+            return new {
+                NickName = new string(chars),
+                index = (int)len[0]
+            };
         }
 
         private List<Human> players

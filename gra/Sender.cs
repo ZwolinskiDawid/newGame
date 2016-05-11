@@ -27,5 +27,17 @@ namespace gra
 
             this.sender.Send(buffor);
         }
+
+        public void sendNickName(string name)
+        {
+            byte[] bytes = new byte[name.Length * sizeof(char)];
+            System.Buffer.BlockCopy(name.ToCharArray(), 0, bytes, 0, bytes.Length);
+
+            byte[] len = new byte[1];
+            len[0] = (byte)bytes.Length;
+
+            this.sender.Send(len);
+            this.sender.Send(bytes);
+        }
     }
 }

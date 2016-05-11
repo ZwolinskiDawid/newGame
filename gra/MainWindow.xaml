@@ -5,21 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gra"
         mc:Ignorable="d"
-        Title="MainWindow" Height="725" Width="900" Keyboard.PreviewKeyDown="Window_KeyDown" Keyboard.PreviewKeyUp="Window_KeyUp">
+        Title="MainWindow" Height="725" Width="900">
     <Grid Margin="0,0,2,0">
         <Canvas x:Name="gameBorder" Margin="5,5,315,19" Background="#FFBDBDBD" ClipToBounds="True" Width="670" Height="675"/>
-        <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="680,41,0,0" VerticalAlignment="Top" Width="200" Click="Connect_Click" Height="43"/>
-        <Label x:Name="status" Content="Status:   No connection" HorizontalAlignment="Left" Margin="695,89,0,0" VerticalAlignment="Top" Width="132"/>
-        <Button x:Name="start" Content="Start Game" HorizontalAlignment="Left" Margin="680,132,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False" Click="Start_Game_Click" Height="49"/>
-        <TextBox x:Name="ipAdress" HorizontalAlignment="Left" Height="23" Margin="744,8,0,0" TextWrapping="Wrap" Text="192.168.137.250" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="label1" Content="Ip Adress:" HorizontalAlignment="Left" Margin="680,5,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="player0" Content="Player 1:" HorizontalAlignment="Left" Margin="695,203,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="player1" Content="Player 2:" HorizontalAlignment="Left" Margin="695,234,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="player2" Content="Player 3:" HorizontalAlignment="Left" Margin="695,265,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="player3" Content="Player 4:" HorizontalAlignment="Left" Margin="695,296,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="result0" Content="Label" HorizontalAlignment="Left" Margin="754,203,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="result1" Content="Label" HorizontalAlignment="Left" Margin="754,234,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="result2" Content="Label" HorizontalAlignment="Left" Margin="754,265,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="result3" Content="Label" HorizontalAlignment="Left" Margin="754,296,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="connect" Content="Connect" HorizontalAlignment="Left" Margin="680,77,0,0" VerticalAlignment="Top" Width="200" Click="Connect_Click" Height="43"/>
+        <Label x:Name="statusLabel" Content="Status:" HorizontalAlignment="Left" Margin="701,140,0,0" VerticalAlignment="Top" Width="45"/>
+        <Button x:Name="start" Content="Start Game" HorizontalAlignment="Left" Margin="680,171,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False" Click="Start_Game_Click" Height="49"/>
+        <TextBox x:Name="ipAdress" HorizontalAlignment="Left" Height="23" Margin="751,40,0,0" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Width="129" />
+        <Label x:Name="label1" Content="Ip Adress:" HorizontalAlignment="Left" Margin="684,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.613,3.769"/>
+        <Label x:Name="player0" Content="Player 1:" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="684,251,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label x:Name="player1" Content="Player 2:" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="684,282,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label x:Name="player2" Content="Player 3:" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="684,313,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label x:Name="player3" Content="Player 4:" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="684,344,0,0" VerticalAlignment="Top" Width="109"/>
+        <Label x:Name="result0" Content="Label" HorizontalAlignment="Left" Margin="801,251,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="result1" Content="Label" HorizontalAlignment="Left" Margin="801,282,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="result2" Content="Label" HorizontalAlignment="Left" Margin="801,313,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="result3" Content="Label" HorizontalAlignment="Left" Margin="801,344,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NickName" HorizontalAlignment="Left" Height="23" Margin="751,9,0,0" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Width="129" MaxLength="15"/>
+        <Label x:Name="label1_Copy" Content="Nickname:" HorizontalAlignment="Left" Margin="680,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.613,3.769"/>
+        <Label x:Name="status" Content="No connection" HorizontalAlignment="Left" Margin="751,140,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
