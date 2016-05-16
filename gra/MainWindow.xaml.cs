@@ -236,7 +236,7 @@ namespace gra
 
         private void sendNickName()
         {
-            getLabelOfPlayers(World.index).Content = this.NickName.Text;
+            getLabelOfPlayers(World.index).Content = this.NickName.Text + ":";
 
             World.sender.sendNickName(this.NickName.Text);
         }

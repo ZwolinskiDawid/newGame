@@ -52,30 +52,55 @@ namespace gra
         public void setRealDirection()
         {
             TargetPosition += TargetDirection;
-            double a = TargetPosition.X - RealPosition.X;
-            double b = TargetPosition.Y - RealPosition.Y;
 
-            if (a != 0 && b!= 0)
+            if (RealPosition != TargetPosition)
             {
-                double c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
-                double x = 3 * a / c;
-                double y = x * b / a;
+                double a = TargetPosition.X - RealPosition.X;
+                double b = TargetPosition.Y - RealPosition.Y;
 
-                RealDirection = new Vector(x, y);
-            }
-            else if(a == 0 && b != 0)
-            {
-                RealDirection = new Vector(0, (b>0) ? 3 : -3);
-            }
-            else if(b == 0 && a != 0)
-            {
-                RealDirection = new Vector((a > 0) ? 3 : -3, 0);
+                if (a != 0 && b != 0)
+                {
+                    double c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+                    double x = 3 * a / c;
+                    double y = x * b / a;
+
+                    RealDirection = new Vector(x, y);
+                }
+                else if (a == 0 && b != 0)
+                {
+                    RealDirection = new Vector(0, (b > 0) ? 3 : -3);
+                }
+                else if (b == 0 && a != 0)
+                {
+                    RealDirection = new Vector((a > 0) ? 3 : -3, 0);
+                }
             }
         }
 
         public void moveRealPosition()
         {
-            if (this != World.players[World.index] || CanMove(RealPosition, RealDirection, 0))
+            if(this != World.players[World.index])
+            {
+                if (RealDirection != new Vector(0,0))
+                {
+                    Vector diff = TargetPosition - RealPosition;
+
+                    if (RealDirection.Length > diff.Length)
+                    {
+                        RealPosition = TargetPosition;
+                        RealDirection = new Vector(0, 0);
+                    }
+                    else
+                    {
+                        RealPosition += RealDirection;
+                    }
+                }
+                else
+                {
+                    RealPosition += RealDirection;
+                }
+            }
+            else if (CanMove(RealPosition, RealDirection, 0))
             {
                 RealPosition += RealDirection;
             }
